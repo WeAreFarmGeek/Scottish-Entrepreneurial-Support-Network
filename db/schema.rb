@@ -11,16 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808133857) do
+ActiveRecord::Schema.define(version: 20130809110917) do
 
   create_table "organisations", force: true do |t|
     t.string   "name"
     t.text     "blurb"
-    t.integer  "parent"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer  "parent_id"
+  end
+
+  create_table "organisations_tags", force: true do |t|
+    t.integer "organisation_id"
+    t.integer "tag_id"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

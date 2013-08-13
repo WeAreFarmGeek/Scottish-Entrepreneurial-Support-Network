@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<% if @organisation.logo %>
+<p>
+	<%= image_tag @organisation.logo(:thumb) %>
+</p>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @organisation.name %>
+</p>
+
+<p>
+  <strong>Blurb:</strong>
+  <%= @organisation.blurb %>
+</p>
+
+
+<% if @organisation.parent %>
+	<p>
+	  <strong>Parent:</strong>
+	  <%= @organisation.parent.name %>
+	</p>
+<% end %>
+
+<%= link_to 'Edit', edit_organisation_path(@organisation) %> |
+<%= link_to 'Back', organisations_path %>

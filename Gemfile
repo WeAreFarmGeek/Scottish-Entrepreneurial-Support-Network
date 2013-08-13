@@ -27,7 +27,6 @@ gem 'paperclip'
 # For building forms
 gem 'simple_form'
 
-gem "typus", :git => "git://github.com/fesplugas/typus.git"
 gem 'kaminari'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

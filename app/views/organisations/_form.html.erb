@@ -1,0 +1,15 @@
+<%= simple_form_for(@organisation) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :name %>
+    <%= f.input :blurb %>
+    <%= f.input :logo %>
+    <%= f.input :parent_id, collection: Organisation.where.not(id: @organisation.id) %>
+    <%= f.association :tags, as: :check_boxes  %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
