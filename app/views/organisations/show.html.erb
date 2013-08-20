@@ -16,6 +16,15 @@
   <%= @organisation.blurb %>
 </p>
 
+<% if @organisation.tags.length > 0 %>
+  <p>
+    <strong>Tags:</strong>
+    <ul>
+      <%= @organisation.tags.all.inject("") {|i,j| i += "<li>#{j.name}</li>" }.html_safe %>
+    </ul>
+  </p>
+<% end %>
+
 
 <% if @organisation.parent %>
 	<p>
