@@ -5,7 +5,7 @@ $(document).ready(function(){
     .css('position', 'absolute')
     .css('z-index', '-1');
     //Create a new ST instance  
-    var st = new $jit.ST({
+    ST = new $jit.ST({
       //id of viz container element  
       injectInto: 'vis',  
       //set duration for the animation  
@@ -24,10 +24,10 @@ $(document).ready(function(){
       //nodes or edges  
       Node: {  
         height: 120,
-      width: 100,
-      type: 'rectangle',  
-      color: '#fff',  
-      overridable: true  
+        width: 100,
+        type: 'rectangle',  
+        color: '#fff',  
+        overridable: true  
       },  
 
       Edge: {  
@@ -107,13 +107,65 @@ $(document).ready(function(){
     });  
 
     //load json data  
-    st.loadJSON(json);  
+    ST.loadJSON(json);  
     //compute node positions and layout  
-    st.compute();  
+    ST.compute();  
     //emulate a click on the root node.  
-    st.onClick(st.root);  
+    ST.onClick(ST.root);  
 
     // Tag filtering functionality:
+    // After the user stops typing in the
+    // textbox for more than a second, then
+    // we filter the graph by making translucent
+    // all nodes which don't match the search.
+    
+    // Lets define a way for us to delay after
+    // the keyup:
+    var delay = (function(){
+      var timer = 0;
+      return function(callback, ms) {
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
+
+
+    // When the text changes on the filter input
+    $('input#filter').keyup(function(){
+      // Capture the context & FilterString
+      Self = this;
+      FilterString = $(Self).val().toLowerCase();
+      // If the string exists (if the user has typed something in)
+      if (FilterString) {
+        // Make sure that the person had finished
+        // typing
+        delay(function(){
+          // For each node
+          $jit.Graph.Util.eachNode(ST.graph, function(node){
+            // Collect the node data, join up the tags so we
+            // can search them all in one go
+            var name  = node.name.toLowerCase();
+            var blurb = node.data.blurb.toLowerCase();
+            var tags  = node.data.tags.join(", ").toLowerCase();
+
+            // Search through all the data collected, if there's no result on this node
+            // then set the alpha to 0.3 (transparent)
+            if (name.indexOf(FilterString) == -1 && blurb.indexOf(FilterString) == -1 && tags.indexOf(FilterString) == -1) {
+              node.setData('alpha', 0.3);
+            // Otherwise, set the alpha to 1 (fully opaque)
+            } else {
+              node.setData('alpha', 1);
+            }
+          });
+        }, 1000);
+
+      // If there is nothing there (if the user deleted the text previously in there)
+      } else {
+        $jit.Graph.Util.eachNode(ST.graph, function(node){
+          node.setData('alpha', 1);
+        });
+      }
+    });
 
 
   });
