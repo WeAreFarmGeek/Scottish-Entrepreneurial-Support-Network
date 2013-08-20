@@ -4,10 +4,10 @@ $(document).ready(function(){
     .width($(document).width())
     .css('position', 'absolute')
     .css('z-index', '-1');
-  //Create a new ST instance  
-  var st = new $jit.ST({  
-    //id of viz container element  
-    injectInto: 'vis',  
+    //Create a new ST instance  
+    var st = new $jit.ST({
+      //id of viz container element  
+      injectInto: 'vis',  
       //set duration for the animation  
       duration: 300,  
       //set animation transition type  
@@ -33,6 +33,34 @@ $(document).ready(function(){
       Edge: {  
         type: 'bezier',
         overridable: true  
+      },
+
+
+      Tips: {
+        enable: true,
+        onShow: function(tip, node) {
+          var html = "";
+          html += "<div class='header'>";
+            html += "<img src='"+ node.data.logo.thumb +"'/>";
+            html += "<h6>"+ node.name +"</h6>";
+            html += "<div class='clearfix'></div>";
+          html += "</div>";
+          html += "<p>"+ node.data.blurb +"</p>";
+
+
+          if (node.data.tags && node.data.tags.length > 0) {
+            html += "<strong>Tags:</strong>";
+            html += "<ul>";
+            for (var x = 0; x < node.data.tags.length; x++) {
+              html += "<li>";
+                html += node.data.tags[x];
+              html += "</li>";
+            }
+            html += "</ul>";
+          }
+          
+          tip.innerHTML = html;
+        }
       },
 
       //This method is called on DOM label creation.  
@@ -76,13 +104,17 @@ $(document).ready(function(){
               ][random];
         }
       }
-  });  
-  //load json data  
-  st.loadJSON(json);  
-  //compute node positions and layout  
-  st.compute();  
-  //emulate a click on the root node.  
-  st.onClick(st.root);  
+    });  
+
+    //load json data  
+    st.loadJSON(json);  
+    //compute node positions and layout  
+    st.compute();  
+    //emulate a click on the root node.  
+    st.onClick(st.root);  
+
+    // Tag filtering functionality:
+
 
   });
 });

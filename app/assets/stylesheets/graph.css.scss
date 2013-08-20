@@ -6,3 +6,24 @@
     overflow:hidden;
 }
 
+.tip {
+  background: #fff;
+  border: 1px solid #333;
+  padding: 20px;
+  margin: 0;
+}
+
+.tip h6 {
+  font-size: 18px;
+}
+
+.tip h6, .tip p { padding: 0; margin: 0; }
+
+.tip .header { padding: 5px; }
+.tip .header img { float: left; height: 100px; }
+.tip .header h6 { 
+  float: right;
+  line-height: 100px;
+  padding: 5px;
+}
+
