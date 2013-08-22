@@ -1,9 +1,11 @@
 $(document).ready(function(){
   $.getJSON('/organisations/tree.json',function(json){
-    $('div#vis').height($(document).height())
-    .width($(document).width())
+    $('div#vis').height($(window).height())
+    .width($(window).width())
     .css('position', 'absolute')
+    .css('top', 0)
     .css('z-index', '-1');
+
     //Create a new ST instance  
     ST = new $jit.ST({
       //id of viz container element  
@@ -14,10 +16,12 @@ $(document).ready(function(){
       transition: $jit.Trans.Quart.easeInOut,  
       //set distance between node and its children  
       levelDistance: 50,  
+      levelsToShow: 999,
+
       //enable panning  
       Navigation: {  
         enable:  true,  
-      panning: true  
+        panning: true  
       },  
       //set node and edge styles  
       //set overridable=true for styling individual  
@@ -39,7 +43,7 @@ $(document).ready(function(){
       Tips: {
         enable: true,
         onShow: function(tip, node) {
-          var html = "";
+          var html = "<div style='max-width: 300px'>";
           html += "<div class='header'>";
             html += "<img src='"+ node.data.logo.thumb +"'/>";
             html += "<h6>"+ node.name +"</h6>";
@@ -58,6 +62,19 @@ $(document).ready(function(){
             }
             html += "</ul>";
           }
+
+          if (node.data.categories && node.data.categories.length > 0) {
+            html += "<strong>Categories:</strong>";
+            html += "<ul>";
+            for (var x = 0; x < node.data.categories.length; x++) {
+              html += "<li>";
+                html += node.data.categories[x];
+              html += "</li>";
+            }
+            html += "</ul>";
+          }
+
+          html += "</div>";
           
           tip.innerHTML = html;
         }
@@ -67,8 +84,7 @@ $(document).ready(function(){
       //Use this method to add event handlers and styles to  
       //your node.  
       onCreateLabel: function(label, node){  
-
-        var image = $('<img>').attr('width', 100).attr('src', node.data.logo.thumb)[0].outerHTML;
+        var image = $('<img>').attr('width', 101).css('margin-left', '-1px').attr('src', node.data.logo.thumb)[0].outerHTML;
 
         label.innerHTML  = node.name + ' ' + image;
         label.id         = node.id;              
@@ -101,7 +117,7 @@ $(document).ready(function(){
             '#ffd43a',
             '#e5502d',
             '#e5502d'
-              ][random];
+          ][random];
         }
       }
     });  
@@ -130,10 +146,9 @@ $(document).ready(function(){
     })();
 
 
-    // When the text changes on the filter input
-    $('input#filter').keyup(function(){
-      // Capture the context & FilterString
-      Self = this;
+    function do_filter(context, type) {
+      Self = context;
+      Type = type;
       FilterString = $(Self).val().toLowerCase();
       // If the string exists (if the user has typed something in)
       if (FilterString) {
@@ -144,17 +159,21 @@ $(document).ready(function(){
           $jit.Graph.Util.eachNode(ST.graph, function(node){
             // Collect the node data, join up the tags so we
             // can search them all in one go
-            var name  = node.name.toLowerCase();
-            var blurb = node.data.blurb.toLowerCase();
-            var tags  = node.data.tags.join(", ").toLowerCase();
+            //var data = node.name.toLowerCase() + " " + node.data.blurb.toLowerCase() + " ";
+            var data = "";
+            if (Type == 'tag') {
+              data += node.data.tags.join(" ").toLowerCase();
+            }
+
+            if (Type == 'category') {
+              data += node.data.categories.join(" ").toLowerCase();
+            }
+
 
             // Search through all the data collected, if there's no result on this node
             // then set the alpha to 0.3 (transparent)
-            if (name.indexOf(FilterString) == -1 && blurb.indexOf(FilterString) == -1 && tags.indexOf(FilterString) == -1) {
+            if (data.indexOf(FilterString) == -1) {
               node.setData('alpha', 0.3);
-            // Otherwise, set the alpha to 1 (fully opaque)
-            } else {
-              node.setData('alpha', 1);
             }
           });
         }, 1000);
@@ -165,6 +184,16 @@ $(document).ready(function(){
           node.setData('alpha', 1);
         });
       }
+    }
+
+    // When the text changes on the filter input
+    $('input#tag_filter').keyup(function(){
+      do_filter(this, 'tag');
+    });
+
+    // When the text changes on the filter input
+    $('input#category_filter').keyup(function(){
+      do_filter(this, 'category');
     });
 
 

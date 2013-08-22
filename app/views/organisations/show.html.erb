@@ -13,14 +13,23 @@
 
 <p>
   <strong>Blurb:</strong>
-  <%= @organisation.blurb %>
 </p>
+<%= simple_format @organisation.blurb %>
 
 <% if @organisation.tags.length > 0 %>
   <p>
     <strong>Tags:</strong>
     <ul>
       <%= @organisation.tags.all.inject("") {|i,j| i += "<li>#{j.name}</li>" }.html_safe %>
+    </ul>
+  </p>
+<% end %>
+
+<% if @organisation.categories.length > 0 %>
+  <p>
+    <strong>Categories:</strong>
+    <ul>
+      <%= @organisation.categories.all.inject("") {|i,j| i += "<li>#{j.name}</li>" }.html_safe %>
     </ul>
   </p>
 <% end %>

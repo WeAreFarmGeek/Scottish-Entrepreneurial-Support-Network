@@ -3,4 +3,5 @@ class Organisation < ActiveRecord::Base
 	has_many :children, :class_name => "Organisation", :foreign_key => "parent_id"
 	belongs_to :parent, :class_name => "Organisation"
 	has_and_belongs_to_many :tags
+	has_and_belongs_to_many :categories, association_foreign_key: 'tag_id'
 end
