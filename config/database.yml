@@ -14,7 +14,7 @@ development:
   database: Scottish-Entrepreneurial-Support-Network_development
   pool: 5
   username: root
-  password: root
+  password: 
   socket: /var/run/mysqld/mysqld.sock
   #host: localhost
 
@@ -27,7 +27,7 @@ test:
   database: Scottish-Entrepreneurial-Support-Network_test
   pool: 5
   username: root
-  password: root
+  password:
   socket: /var/run/mysqld/mysqld.sock
   #host: localhost
 
@@ -36,7 +36,7 @@ production:
   encoding: utf8
   database: Scottish-Entrepreneurial-Support-Network_production
   pool: 5
-  username: root
-  password: root
+  username: poy
+  password: db79SthrGIkrNy789e33rulK5IANnJcyesh3csh8NNzCmqPKesDVe8j9GlJN9gw
   socket: /var/run/mysqld/mysqld.sock
   #host: localhost
