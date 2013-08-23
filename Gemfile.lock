@@ -38,6 +38,7 @@ GEM
       uniform_notifier
     climate_control (0.0.3)
       activesupport (>= 3.0)
+    closure-compiler (1.1.10)
     cocaine (0.5.1)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.0.9)
@@ -209,6 +210,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bullet
+  closure-compiler
   coffee-rails (~> 4.0.0)
   factory_girl_rails
   git-smart
