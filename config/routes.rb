@@ -1,11 +1,13 @@
 ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
 
   root "home#index"
-  get "/organisations/tree(.:format)", to: "organisations#tree", as: "tree_organisation"
 
-  resources :organisations
-  resources :tags
-  resources :categories
+  namespace :admin do
+    get "/organisations/tree(.:format)", to: "organisations#tree", as: "tree_organisation"
+    resources :organisations
+    resources :tags
+    resources :categories
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scottish Entrepreneurial Support Network | Admin</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<nav class="admin">
+  <ul>
+    <li>
+      <%= link_to :root do %>
+        <%= image_tag "logo.png", :height => "35px" %>
+      <% end %>
+    </li>
+    <li><%= link_to "Organisations", :admin_organisations %></li>
+    <li><%= link_to "Tags", :admin_tags %></li>
+    <li><%= link_to "Categories", :admin_categories %></li>
+  </ul>
+</nav>
+
+<div style="-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: moz-none; -ms-user-select: none; user-select: none;">
+  <a href="/">
+    <%= image_tag "logo.png", :style => "float: left;height: 250px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: moz-none; -ms-user-select: none; user-select: none;" %>
+    <div style="float: left; margin-top: 80px; margin-left: 20px">
+      <h1>Scottish Entrepreneurial Support Network</h1>
+      <h2>By Power of Youth</h2>
+    </div>
+  </a>
+</div>
+
+<div style="clear: both;"></div>
+
+
+<%= yield %>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-class TagsController < ApplicationController
+class Admin::TagsController < Admin::AdminController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
 
   # GET /tags
@@ -28,7 +28,7 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+        format.html { redirect_to admin_tag_path(@tag), notice: 'Tag was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tag }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class TagsController < ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+        format.html { redirect_to admin_tag_path(@tag), notice: 'Tag was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class TagsController < ApplicationController
   def destroy
     @tag.destroy
     respond_to do |format|
-      format.html { redirect_to tags_url }
+      format.html { redirect_to admin_tags_url }
       format.json { head :no_content }
     end
   end

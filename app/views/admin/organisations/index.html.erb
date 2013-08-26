@@ -16,9 +16,9 @@
       <tr>
         <td><%= organisation.name %></td>
         <td><%= organisation.parent.name if organisation.parent %></td>
-        <td><%= link_to 'Show', organisation %></td>
-        <td><%= link_to 'Edit', edit_organisation_path(organisation) %></td>
-        <td><%= link_to 'Destroy', organisation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', admin_organisation_path(organisation) %></td>
+        <td><%= link_to 'Edit', edit_admin_organisation_path(organisation) %></td>
+        <td><%= link_to 'Destroy', admin_organisation_path(organisation), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Organisation', new_organisation_path %>
+<%= link_to 'New Organisation', new_admin_organisation_path %>

@@ -1,4 +1,4 @@
-class OrganisationsController < ApplicationController
+class Admin::OrganisationsController < Admin::AdminController
   before_action :set_organisation, only: [:show, :edit, :update, :destroy]
 
   def tree
@@ -32,7 +32,7 @@ class OrganisationsController < ApplicationController
 
     respond_to do |format|
       if @organisation.save
-        format.html { redirect_to @organisation, notice: 'Organisation was successfully created.' }
+        format.html { redirect_to admin_organisation_path(@organisation), notice: 'Organisation was successfully created.' }
         format.json { render action: 'show', status: :created, location: @organisation }
       else
         format.html { render action: 'new' }
@@ -46,7 +46,7 @@ class OrganisationsController < ApplicationController
   def update
     respond_to do |format|
       if @organisation.update(organisation_params)
-        format.html { redirect_to @organisation, notice: 'Organisation was successfully updated.' }
+        format.html { redirect_to admin_organisation_path(@organisation), notice: 'Organisation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -60,7 +60,7 @@ class OrganisationsController < ApplicationController
   def destroy
     @organisation.destroy
     respond_to do |format|
-      format.html { redirect_to organisations_url }
+      format.html { redirect_to admin_organisations_url }
       format.json { head :no_content }
     end
   end

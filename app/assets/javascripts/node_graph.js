@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $.getJSON('/organisations/tree.json',function(json){
+  $.getJSON('/admin/organisations/tree.json',function(json){
     $('div#vis').height($(window).height())
     .width($(window).width())
     .css('position', 'absolute')
