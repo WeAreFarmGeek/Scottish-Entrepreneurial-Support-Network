@@ -30,7 +30,7 @@ ScottishEntrepreneurialSupportNetwork::Application.configure do
   end
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = NoCompression.new
+  #config.assets.js_compressor = NoCompression.new
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
