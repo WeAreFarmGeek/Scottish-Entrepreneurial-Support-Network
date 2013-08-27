@@ -13,4 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require select2
 //= require_tree .
+
+
+$(document).ready(function(){
+  $('select.select2').select2({
+    allowClear: true,
+    width: '100%'
+  });
+});
