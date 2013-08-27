@@ -20,9 +20,8 @@ nav.admin {
         text-decoration: none;
       }
 
-      &:hover {
-        background: #666;
-      }
+      &:hover { background: #666; }
+      &.logout { float: right; }
     }
 
   }

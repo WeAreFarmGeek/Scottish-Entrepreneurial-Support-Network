@@ -18,20 +18,18 @@
     <li><%= link_to "Organisations", :admin_organisations %></li>
     <li><%= link_to "Tags", :admin_tags %></li>
     <li><%= link_to "Categories", :admin_categories %></li>
+    <li class="logout"><%= link_to "Logout", :logout %></li>
   </ul>
 </nav>
 
-<!--
-<div style="-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: moz-none; -ms-user-select: none; user-select: none;">
-  <a href="/" data-no-turbolink="true">
-    <%= image_tag "logo.png", :style => "float: left;height: 250px; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: moz-none; -ms-user-select: none; user-select: none;" %>
-    <div style="float: left; margin-top: 80px; margin-left: 20px">
-      <h1>Scottish Entrepreneurial Support Network</h1>
-      <h2>By Power of Youth</h2>
-    </div>
-  </a>
-</div>
--->
+<% if flash[:alert] %>
+  <p class="flash-error"><%= flash[:alert] %></p>
+<% end %>
+
+<% if flash[:notice] %>
+  <p class="flash-notice"><%= flash[:notice] %></p>
+<% end %>
+
 
 <div style="clear: both;"></div>
 

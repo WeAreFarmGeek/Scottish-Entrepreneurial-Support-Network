@@ -2,6 +2,10 @@ ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
 
   root "home#index"
 
+  get  'login', to: 'login#index', as: "login"
+  get  'logout', to: 'login#logout', as: "logout"
+  post 'login', to: 'login#login'
+
   namespace :admin do
     root 'organisations#index'
     get "/organisations/tree(.:format)", to: "organisations#tree", as: "tree_organisation"
