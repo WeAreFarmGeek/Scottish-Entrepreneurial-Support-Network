@@ -3,6 +3,7 @@ ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
   root "home#index"
 
   namespace :admin do
+    root 'organisations#index'
     get "/organisations/tree(.:format)", to: "organisations#tree", as: "tree_organisation"
     resources :organisations
     resources :tags
