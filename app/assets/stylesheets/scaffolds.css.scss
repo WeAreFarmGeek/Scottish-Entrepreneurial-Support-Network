@@ -1,17 +1,19 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Arimo);
 html { -webkit-font-smoothing: antialiased; }
 body {
   margin: 0;
   background-color: #fff;
   color: #333;
-  font-family: "Helvetica Neue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  font-family: "Helvetica Neue", "Helvetica Neue", Helvetica, 'Roboto', 'Liberation Sans', 'Arimo', Arial, sans-serif;
+  font-weight: 400;
   font-size: 13px;
   line-height: 18px;
 }
 
 p, ol, ul, td {
-  font-family: "Helvetica Neue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  font-family: "Helvetica Neue", "Helvetica Neue", Helvetica, 'Roboto', 'Liberation Sans', 'Arimo', Arial, sans-serif;
+  font-weight: 400;
   font-size: 13px;
   line-height: 18px;
 }
