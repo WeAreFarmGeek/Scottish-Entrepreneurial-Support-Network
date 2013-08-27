@@ -18,18 +18,15 @@
     <li><%= link_to "Organisations", :admin_organisations %></li>
     <li><%= link_to "Tags", :admin_tags %></li>
     <li><%= link_to "Categories", :admin_categories %></li>
+    <% if flash[:alert] %>
+      <li class="flash alert"><%= flash[:alert] %></li>
+    <% end %>
+    <% if flash[:notice] %>
+      <li class="flash notice"><%= flash[:notice] %></li>
+    <% end %>
     <li class="logout"><%= link_to "Logout", :logout %></li>
   </ul>
 </nav>
-
-<% if flash[:alert] %>
-  <p class="flash-error"><%= flash[:alert] %></p>
-<% end %>
-
-<% if flash[:notice] %>
-  <p class="flash-notice"><%= flash[:notice] %></p>
-<% end %>
-
 
 <div style="clear: both;"></div>
 

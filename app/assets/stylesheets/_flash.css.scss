@@ -1,0 +1,13 @@
+.flash {
+  width: 200px;
+
+  &.alert, &.alert:hover {
+    background: #ED183B;
+    color: #fff;
+  }
+
+  &.notice, &.notice:hover {
+    background: #1BE07E;
+    color: #333;
+  }
+}
