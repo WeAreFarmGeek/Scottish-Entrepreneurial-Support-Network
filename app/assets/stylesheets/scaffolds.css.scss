@@ -66,3 +66,30 @@ div {
     list-style: square;
   }
 }
+
+body, #vis, #vis-label, 
+.logo, .logo img, .logo .header,
+.search_form {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: moz-none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.logo {
+
+  margin: 10px;
+
+  img {
+    float: left;
+    height: 250px;
+  }
+
+  div.header {
+    float: left;
+    margin-top: 80px;
+    margin-left: 20px
+  }
+}
