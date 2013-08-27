@@ -28,7 +28,7 @@ $(document).ready(function(){
       //nodes or edges  
       Node: {  
         height: 120,
-        width: 100,
+        width: 150,
         type: 'rectangle',  
         color: '#fff',  
         overridable: true  
@@ -86,12 +86,12 @@ $(document).ready(function(){
       onCreateLabel: function(label, node){  
         var image = $('<img>').attr('width', 101).css('margin-left', '-1px').attr('src', node.data.logo.thumb)[0].outerHTML;
 
-        label.innerHTML  = node.name + ' ' + image;
+        label.innerHTML  = node.name + '<br/>' + image;
         label.id         = node.id;              
         label.onclick    = function(){};
         //set label styles  
         var style        = label.style;  
-        style.width      = 100 + 'px';  
+        style.width      = 150 + 'px';  
         style.height     = 100  + 'px';              
         style.cursor     = 'pointer';  
         style.color      = '#333';  
