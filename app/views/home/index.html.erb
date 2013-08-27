@@ -2,13 +2,13 @@
   <h3>Filter</h3>
 
   <label for="category_filter">I am:</label><br/>
-  <input type="text" name="category_filter" id="category_filter">
+  <%= select_tag :category_filter, options_for_select(@categories), :id => :category_filter, :class => 'select2' %>
 
   <div class="clearfix"></div>
   <br/>
 
   <label for="tag_filter">I am looking for:</label><br/>
-  <input type="text" name="tag_filter" id="tag_filter">
+  <%= select_tag :tag_filter, options_for_select(@tags), :id => :tag_filter, :class => 'select2' %>
 </div>
 
 <div id="vis"></div>

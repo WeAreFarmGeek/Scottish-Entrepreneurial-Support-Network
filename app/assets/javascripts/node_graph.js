@@ -150,53 +150,46 @@ $(document).ready(function(){
       Self = context;
       Type = type;
       FilterString = $(Self).val().toLowerCase();
+
+      // Reset the selection
+      $jit.Graph.Util.eachNode(ST.graph, function(node){
+        node.setData('alpha', 1);
+      });
+
       // If the string exists (if the user has typed something in)
       if (FilterString) {
-        // Make sure that the person had finished
-        // typing
-        delay(function(){
-          // For each node
-          $jit.Graph.Util.eachNode(ST.graph, function(node){
-            // Collect the node data, join up the tags so we
-            // can search them all in one go
-            //var data = node.name.toLowerCase() + " " + node.data.blurb.toLowerCase() + " ";
-            var data = "";
-            if (Type == 'tag') {
-              data += node.data.tags.join(" ").toLowerCase();
-            }
+        // For each node
+        $jit.Graph.Util.eachNode(ST.graph, function(node){
+          // Collect the node data, join up the tags so we
+          // can search them all in one go
+          //var data = node.name.toLowerCase() + " " + node.data.blurb.toLowerCase() + " ";
+          var data = "";
+          if (Type == 'tag') {
+            data += node.data.tags.join(" ").toLowerCase();
+          }
 
-            if (Type == 'category') {
-              data += node.data.categories.join(" ").toLowerCase();
-            }
+          if (Type == 'category') {
+            data += node.data.categories.join(" ").toLowerCase();
+          }
 
 
-            // Search through all the data collected, if there's no result on this node
-            // then set the alpha to 0.3 (transparent)
-            if (data.indexOf(FilterString) == -1) {
-              node.setData('alpha', 0.3);
-            }
-          });
-          ST.refresh();
-        }, 500);
-
-      // If there is nothing there (if the user deleted the text previously in there)
-      } else {
-        delay(function(){
-          $jit.Graph.Util.eachNode(ST.graph, function(node){
-            node.setData('alpha', 1);
-          });
-          ST.refresh();
-        }, 500);
+          // Search through all the data collected, if there's no result on this node
+          // then set the alpha to 0.3 (transparent)
+          if (data.indexOf(FilterString) == -1) {
+            node.setData('alpha', 0.3);
+          }
+        });
       }
+      ST.refresh();
     }
 
     // When the text changes on the filter input
-    $('input#tag_filter').keyup(function(){
+    $('select#tag_filter').change(function(){
       do_filter(this, 'tag');
     });
 
     // When the text changes on the filter input
-    $('input#category_filter').keyup(function(){
+    $('select#category_filter').change(function(){
       do_filter(this, 'category');
     });
 
