@@ -176,13 +176,17 @@ $(document).ready(function(){
               node.setData('alpha', 0.3);
             }
           });
-        }, 1000);
+          ST.refresh();
+        }, 500);
 
       // If there is nothing there (if the user deleted the text previously in there)
       } else {
-        $jit.Graph.Util.eachNode(ST.graph, function(node){
-          node.setData('alpha', 1);
-        });
+        delay(function(){
+          $jit.Graph.Util.eachNode(ST.graph, function(node){
+            node.setData('alpha', 1);
+          });
+          ST.refresh();
+        }, 500);
       }
     }
 
