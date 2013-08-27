@@ -1,0 +1,18 @@
+.search_form {
+  margin-top: 25px;
+  background: #333;
+  color: #fff;
+  width: auto;
+  float: left;
+  padding: 10px;
+  border-radius: 0 5px 5px 0;
+  & > input { float: right; }
+  & > label { float: left; }
+  & > h3 { 
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+}
+
