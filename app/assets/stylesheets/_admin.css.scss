@@ -1,3 +1,23 @@
+.admin_content {
+  width: 960px;
+  margin: 0 auto;
+
+  h3 { font-size: 25px; }
+
+  table { 
+    width: 100%; 
+    thead tr { background: #333; color: #fff; }
+    tbody {
+      tr {
+        td:nth-last-child(-n+3) { text-align: center; }
+        &:nth-child(even) { background: #fcfcfc; }
+        &:nth-child(odd) { background: #f0f0f0; }
+      }
+    }
+  }
+}
+
+
 .admin_login {
   width: 230px;
   margin: 0 auto;
