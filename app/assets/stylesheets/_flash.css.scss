@@ -1,6 +1,4 @@
 .flash {
-  width: 200px;
-
   &.alert, &.alert:hover {
     background: #ED183B;
     color: #fff;
@@ -10,4 +8,10 @@
     background: #1BE07E;
     color: #333;
   }
+}
+
+p.flash { 
+  margin: 20px auto;
+  width: 200px; 
+  padding: 15px;
 }

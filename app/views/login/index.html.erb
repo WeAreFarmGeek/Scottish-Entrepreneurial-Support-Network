@@ -1,9 +1,16 @@
-<%= form_for :user, :url => login_path do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
+<div class="admin_login">
+  <h2>Login</h2>
+  <%= form_for :user, :url => login_path do |f| %>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+    <br/>
 
-  <%= f.submit "Login" %>
-<% end %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+    <br/>
+
+    <%= f.submit "Login" %>
+  <% end %>
+</div>
