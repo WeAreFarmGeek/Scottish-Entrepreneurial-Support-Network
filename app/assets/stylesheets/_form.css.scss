@@ -1,0 +1,15 @@
+.simple_form {
+  .inputs {
+    .input {
+      background: #ccc;
+      padding: 10px 20px;
+      margin: 10px 0;
+      
+      label:first-child {
+        display: block;
+        font-weight: bold;
+      }
+
+    }
+  }
+}
