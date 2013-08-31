@@ -1,6 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
 @import url(http://fonts.googleapis.com/css?family=Arimo);
+
 html { -webkit-font-smoothing: antialiased; }
+
 body {
   margin: 0;
   background-color: #fff;
@@ -80,16 +82,35 @@ body, #vis, #vis-label,
 
 .logo {
 
-  margin: 10px;
+  width: 960px;
+  margin: 10px auto;
 
   img {
     float: left;
-    height: 250px;
+    height: 135px;
   }
 
   div.header {
     float: left;
-    margin-top: 80px;
-    margin-left: 20px
+    margin-top: 25px;
+    margin-left: 50px;
+    border-bottom: 2px solid #99a2bc;
+
+    h1 { color: #0096d7; }
+    h2 { color: #97a1bb; }
   }
+}
+
+div.footer {
+  position: absolute;
+  bottom: 0;
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+
+  h3 { color: #e3e3e3; margin: 0; padding: 0; }
+  hr { border-bottom: 2px solid #e3e3e3; border-top: none; }
+  img { float: right; }
 }
