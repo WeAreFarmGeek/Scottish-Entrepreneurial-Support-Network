@@ -107,6 +107,7 @@ $(document).ready(function(){
       //The data properties prefixed with a dollar  
       //sign will override the global node style properties.  
       onBeforePlotNode: function(node){
+        console.log("Plotting node...");
         if (!node.data.$color) {
           var random = Math.floor((Math.random()*7));
           node.data.$color = [
