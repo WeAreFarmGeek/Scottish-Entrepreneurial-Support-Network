@@ -107,7 +107,6 @@ $(document).ready(function(){
       //The data properties prefixed with a dollar  
       //sign will override the global node style properties.  
       onBeforePlotNode: function(node){
-        console.log("Plotting node...");
         if (!node.data.$color) {
           var random = Math.floor((Math.random()*7));
           node.data.$color = [
@@ -127,9 +126,9 @@ $(document).ready(function(){
     //load json data  
     ST.loadJSON(json);  
     //compute node positions and layout  
-    ST.compute();  
+    ST.compute();
     //emulate a click on the root node.  
-    ST.onClick(ST.root);  
+    ST.onClick(ST.root);
 
     // Tag filtering functionality:
     // After the user stops typing in the

@@ -586,12 +586,12 @@ $jit.json = {
 
   */
   prune: function(tree, maxLevel) {
-    this.each(tree, function(elem, i) {
-      if (i == maxLevel && elem.children) {
-        delete elem.children;
-        elem.children = [];
-      }
-    });
+    //this.each(tree, function(elem, i) {
+    //  if (i == maxLevel && elem.children) {
+    //    delete elem.children;
+    //    elem.children = [];
+    //  }
+    //});
   },
   /*
      Method: getParent
