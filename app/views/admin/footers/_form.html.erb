@@ -1,0 +1,11 @@
+<%= simple_form_for(@footer, :url => admin_footers_path) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :image %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

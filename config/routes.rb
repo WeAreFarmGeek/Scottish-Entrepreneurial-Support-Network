@@ -1,5 +1,7 @@
 ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
 
+  resources :footers
+
   root "home#index"
 
   get  'login', to: 'login#index', as: "login"
@@ -12,6 +14,8 @@ ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
     resources :organisations
     resources :tags
     resources :categories
+    patch "footers", to: "footers#index", as: "admin_footers"
+    resources :footers
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

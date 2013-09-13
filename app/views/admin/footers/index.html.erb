@@ -1,0 +1,27 @@
+<h1>Listing footers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @footers.each do |footer| %>
+      <tr>
+        <td><%= footer.image %></td>
+        <td><%= link_to 'Show', admin_footer_path(footer.id) %></td>
+        <td><%= link_to 'Edit', edit_admin_footer_path(footer.id) %></td>
+        <td><%= link_to 'Destroy', admin_footer_path(footer.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Footer', new_admin_footer_path %>
