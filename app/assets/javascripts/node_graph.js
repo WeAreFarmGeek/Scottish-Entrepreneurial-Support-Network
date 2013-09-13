@@ -16,7 +16,7 @@ $(document).ready(function(){
       transition: $jit.Trans.Quart.easeInOut,  
       //set distance between node and its children  
       levelDistance: 50,  
-      levelsToShow: 50,
+      levelsToShow: 999,
 
       //enable panning  
       Navigation: {  
