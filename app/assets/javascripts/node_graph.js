@@ -15,6 +15,7 @@ $(document).ready(function(){
       //set animation transition type  
       transition: $jit.Trans.Quart.easeInOut,  
       //set distance between node and its children  
+      constrained: false,
       levelDistance: 50,  
       levelsToShow: 999,
 
