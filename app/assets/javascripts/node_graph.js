@@ -194,25 +194,32 @@ $(document).ready(function(){
       do_filter(this, 'category');
     });
 
+
+    ScaleX = ST.canvas.scaleOffsetX;
+    ScaleY = ST.canvas.scaleOffsetY;
+
     function setLabelScaling() {
-      var x = ST.canvas.scaleOffsetX,
-          y = ST.canvas.scaleOffsetY;
-      $(".node").css("-moz-transform",    "scale(" + x + "," +  y + ")");
-      $(".node").css("-webkit-transform", "scale(" + x + "," +  y + ")");
-      $(".node").css("-ms-transform",     "scale(" + x + "," +  y + ")");
-      $(".node").css("-o-transform",      "scale(" + x + "," +  y + ")");
+      $(".node").css("-moz-transform",    "scale(" + ScaleX + "," +  ScaleY + ")");
+      $(".node").css("-webkit-transform", "scale(" + ScaleX + "," +  ScaleY + ")");
+      $(".node").css("-ms-transform",     "scale(" + ScaleX + "," +  ScaleY + ")");
+      $(".node").css("-o-transform",      "scale(" + ScaleX + "," +  ScaleY + ")");
     }
 
     $('canvas').mousewheel(function(event, delta, deltaX, deltaY){
       if (deltaY > 0) {
-        if (ST.canvas.scaleOffsetX < 1.25) {
-          ST.canvas.scale(ST.canvas.scaleOffsetX + 0.05, ST.canvas.scaleOffsetY + 0.05);
-        }
+        if (ScaleX > 0.5) {
+          ScaleX = ScaleX - 0.1;
+          ScaleY = ScaleY - 0.1;
+          ST.canvas.scale(ScaleX, ScaleY);
+        } 
       } else if (deltaY < 0) {
-        if (ST.canvas.scaleOffsetX > 0.1) {
-          ST.canvas.scale(ST.canvas.scaleOffsetX - 0.05, ST.canvas.scaleOffsetY - 0.05);
-        }
+        if (ScaleX < 1.25) {
+          ScaleX = ScaleX + 0.1;
+          ScaleY = ScaleY + 0.1;
+          ST.canvas.scale(ScaleX, ScaleY);
+        } 
       }
+
       setLabelScaling();
       event.stopPropagation();
       event.preventDefault();
