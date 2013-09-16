@@ -194,6 +194,29 @@ $(document).ready(function(){
       do_filter(this, 'category');
     });
 
+    function setLabelScaling() {
+      var x = ST.canvas.scaleOffsetX,
+          y = ST.canvas.scaleOffsetY;
+      $(".node").css("-moz-transform",    "scale(" + x + "," +  y + ")");
+      $(".node").css("-webkit-transform", "scale(" + x + "," +  y + ")");
+      $(".node").css("-ms-transform",     "scale(" + x + "," +  y + ")");
+      $(".node").css("-o-transform",      "scale(" + x + "," +  y + ")");
+    }
+
+    $('canvas').mousewheel(function(event, delta, deltaX, deltaY){
+      if (deltaY > 0) {
+        if (ST.canvas.scaleOffsetX < 1.25) {
+          ST.canvas.scale(ST.canvas.scaleOffsetX + 0.05, ST.canvas.scaleOffsetY + 0.05);
+        }
+      } else if (deltaY < 0) {
+        if (ST.canvas.scaleOffsetX > 0.1) {
+          ST.canvas.scale(ST.canvas.scaleOffsetX - 0.05, ST.canvas.scaleOffsetY - 0.05);
+        }
+      }
+      setLabelScaling();
+      event.stopPropagation();
+      event.preventDefault();
+    });
 
   });
 });
