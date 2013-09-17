@@ -199,10 +199,10 @@ $(document).ready(function(){
     ScaleY = ST.canvas.scaleOffsetY;
 
     function setLabelScaling() {
-      $(".node").css("-moz-transform",    "scale(" + ScaleX + "," +  ScaleY + ")");
-      $(".node").css("-webkit-transform", "scale(" + ScaleX + "," +  ScaleY + ")");
-      $(".node").css("-ms-transform",     "scale(" + ScaleX + "," +  ScaleY + ")");
-      $(".node").css("-o-transform",      "scale(" + ScaleX + "," +  ScaleY + ")");
+      $(".node").css("-moz-transform",    "scale(" + ST.canvas.scaleOffsetX + "," +  ST.canvas.scaleOffsetY + ")");
+      $(".node").css("-webkit-transform", "scale(" + ST.canvas.scaleOffsetX + "," +  ST.canvas.scaleOffsetY + ")");
+      $(".node").css("-ms-transform",     "scale(" + ST.canvas.scaleOffsetX + "," +  ST.canvas.scaleOffsetY + ")");
+      $(".node").css("-o-transform",      "scale(" + ST.canvas.scaleOffsetX + "," +  ST.canvas.scaleOffsetY + ")");
     }
 
     $('canvas').mousewheel(function(event, delta, deltaX, deltaY){
