@@ -12,3 +12,11 @@
  *= require select2
  *= require_tree .
  */
+
+#infobar { 
+  margin-top: 20px;
+  width: 300px; 
+  height: 350px;
+  overflow-y: auto;
+  position: absolute;
+}
