@@ -44,12 +44,9 @@ $(document).ready(function(){
       Tips: {
         enable: true,
         onShow: function(tip, node) {
-          var html = "<div style='max-width: 300px'>";
-          html += "<div class='header'>";
-            html += "<img src='"+ node.data.logo.thumb +"'/>";
-            html += "<h6>"+ node.name +"</h6>";
-            html += "<div class='clearfix'></div>";
-          html += "</div>";
+          var html = "<div>";
+          html += "<h2>"+ node.name +"</h2>";
+          html += "<img style='float: left; padding: 5px' src='"+ node.data.logo.thumb +"'/>";
           html += "<p>"+ node.data.blurb +"</p>";
 
 
@@ -77,7 +74,10 @@ $(document).ready(function(){
 
           html += "</div>";
           
-          tip.innerHTML = html;
+          $("#infobar").html(html);
+          
+          tip.parentElement.removeChild(tip);
+         //tip.innerHTML = html;
         }
       },
 
