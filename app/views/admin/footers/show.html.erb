@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Image:</strong>
-  <%= @footer.image %>
+  <%= image_tag @footer.image(:thumb) %>
 </p>
 
 <%= link_to 'Edit', edit_admin_footer_path(@footer) %> |

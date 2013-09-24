@@ -1,22 +1,16 @@
-<h1>Listing footers</h1>
+<h1>Change the Footer</h1>
 
 <table>
   <thead>
     <tr>
       <th>Image</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @footers.each do |footer| %>
       <tr>
-        <td><%= footer.image %></td>
-        <td><%= link_to 'Show', admin_footer_path(footer.id) %></td>
-        <td><%= link_to 'Edit', edit_admin_footer_path(footer.id) %></td>
-        <td><%= link_to 'Destroy', admin_footer_path(footer.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= image_tag footer.image(:thumb) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +18,8 @@
 
 <br>
 
-<%= link_to 'New Footer', new_admin_footer_path %>
+<% if @footers.first %>
+  <%= link_to 'Delete Footer', admin_footer_path(@footers.first.id), :method => :delete %>
+<% else %>
+  <%= link_to 'Set Footer', new_admin_footer_path %>
+<% end %>

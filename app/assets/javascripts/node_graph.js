@@ -211,16 +211,17 @@ $(document).ready(function(){
           ScaleX = ScaleX - 0.1;
           ScaleY = ScaleY - 0.1;
           ST.canvas.scale(ScaleX, ScaleY);
+          setLabelScaling();
         } 
       } else if (deltaY < 0) {
         if (ScaleX < 1.25) {
           ScaleX = ScaleX + 0.1;
           ScaleY = ScaleY + 0.1;
           ST.canvas.scale(ScaleX, ScaleY);
+          setLabelScaling();
         } 
       }
 
-      setLabelScaling();
       event.stopPropagation();
       event.preventDefault();
     });

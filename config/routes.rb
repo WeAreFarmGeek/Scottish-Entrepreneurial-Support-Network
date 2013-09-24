@@ -11,10 +11,10 @@ ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
   namespace :admin do
     root 'organisations#index'
     get "/organisations/tree(.:format)", to: "organisations#tree", as: "tree_organisation"
+    get "preferences", to: "preferences#index", as: "preferences"
     resources :organisations
     resources :tags
     resources :categories
-    patch "footers", to: "footers#index", as: "admin_footers"
     resources :footers
   end
 

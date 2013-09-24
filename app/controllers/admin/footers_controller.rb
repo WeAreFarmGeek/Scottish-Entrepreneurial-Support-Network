@@ -1,5 +1,6 @@
-class Admin::FootersController < ApplicationController
-  before_action :set_footer, only: [:show, :edit, :update, :destroy]
+class Admin::FootersController < Admin::AdminController 
+  #before_action :set_footer, only: [:show, :edit, :update, :destroy]
+  before_action :set_footer, only: [:show, :edit, :destroy]
 
   # GET /footers
   # GET /footers.json
@@ -17,10 +18,6 @@ class Admin::FootersController < ApplicationController
     @footer = Footer.new
   end
 
-  # GET /footers/1/edit
-  def edit
-  end
-
   # POST /footers
   # POST /footers.json
   def create
@@ -32,20 +29,6 @@ class Admin::FootersController < ApplicationController
         format.json { render action: 'show', status: :created, location: @footer }
       else
         format.html { render action: 'new' }
-        format.json { render json: @footer.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /footers/1
-  # PATCH/PUT /footers/1.json
-  def update
-    respond_to do |format|
-      if @footer.update(footer_params)
-        format.html { redirect_to admin_footer_path(footer.id), notice: 'Footer was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
         format.json { render json: @footer.errors, status: :unprocessable_entity }
       end
     end
