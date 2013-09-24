@@ -16,6 +16,7 @@ ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
     resources :tags
     resources :categories
     resources :footers
+    resources :headers
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

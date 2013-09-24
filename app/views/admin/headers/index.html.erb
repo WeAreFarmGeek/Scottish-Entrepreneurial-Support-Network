@@ -1,0 +1,29 @@
+<h1>Change the Header</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Subtitle</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @headers.each do |header| %>
+      <tr>
+        <td><%= header.title %></td>
+        <td><%= header.subtitle %></td>
+        <td><%= image_tag header.image(:thumb) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if @headers.first %>
+  <%= link_to 'Delete Header', admin_header_path(@headers.first.id), :method => :delete %>
+<% else %>
+  <%= link_to 'Set Header', new_admin_header_path %>
+<% end %>

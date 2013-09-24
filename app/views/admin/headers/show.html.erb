@@ -1,0 +1,7 @@
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @header.image(:thumb) %>
+</p>
+
+<%= link_to 'Edit', edit_admin_header_path(@header) %> |
+<%= link_to 'Back', admin_headers_path %>
