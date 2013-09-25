@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require select2
+//= require d3
 //= require_tree .
 
 

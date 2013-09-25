@@ -13,8 +13,4 @@
 
 <div id="infobar"></div>
 
-<div id="vis"></div>
-
-<style>
-  .clearfix { clear: both; }
-</style>
+<%= render "home/graphs/#{Graph.first.setting}" %>
