@@ -55,7 +55,9 @@ $(document).ready(function(){
         onShow: function(tip, node) {
           var html = "<div>";
           html += "<h2>"+ node.name +"</h2>";
-          html += "<img style='float: left; padding: 5px' src='"+ node.data.logo.thumb +"'/>";
+          if (node.data.logo && node.data.logo.thumb && node.data.logo.thumb.length > 0) {
+            html += "<img style='float: left; padding: 5px' src='"+ node.data.logo.thumb +"'/>";
+          }
           html += "<p>"+ node.data.blurb +"</p>";
 
 
