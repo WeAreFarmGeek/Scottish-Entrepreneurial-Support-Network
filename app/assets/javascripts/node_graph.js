@@ -43,7 +43,9 @@ $(document).ready(function(){
       Events: {
         enable: true,
         onClick: function(node, eventInfo, e){
-          window.location.href = node.data.url;
+          if (node.data.url && node.data.url.length > 0) {
+            window.location.href = node.data.url;
+          }
         }
       },
 
