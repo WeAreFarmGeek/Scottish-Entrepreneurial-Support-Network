@@ -85,9 +85,9 @@ $(document).ready(function(){
           
           
           // Delete the tip that infovis want's to show.
-          tip.parentElement.removeChild(tip);
           // Show our own one instead
           $("#infobar").html(html);
+          tip.parentElement.removeChild(tip);
         }
       },
 
