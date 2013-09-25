@@ -10,6 +10,7 @@ json.data do |json|
   end
   json.tags node.tags.select(:name).inject([]) {|i,j| i.push j.name }
   json.categories node.categories.select(:name).inject([]) {|i,j| i.push j.name }
+  json.url node.url
 end
 json.children node.children do |json, node|
   json.partial! 'node', node: node

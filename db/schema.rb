@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130924214836) do
+ActiveRecord::Schema.define(version: 20130925132025) do
 
   create_table "footers", force: true do |t|
     t.string   "image"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20130924214836) do
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.integer  "parent_id"
+    t.string   "url"
   end
 
   create_table "organisations_tags", force: true do |t|

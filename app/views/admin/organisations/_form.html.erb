@@ -4,6 +4,7 @@
   <div class="inputs">
     <%= f.input :name %>
     <%= f.input :blurb %>
+    <%= f.input :url %>
 
     <%= image_tag @organisation.logo(:thumb) if @organisation.logo? %>
     <%= f.input :logo %>

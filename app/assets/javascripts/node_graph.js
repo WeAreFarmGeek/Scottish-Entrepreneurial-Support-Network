@@ -40,6 +40,13 @@ $(document).ready(function(){
         overridable: true  
       },
 
+      Events: {
+        enable: true,
+        onClick: function(node, eventInfo, e){
+          window.location.href = node.data.url;
+        }
+      },
+
 
       Tips: {
         enable: true,
@@ -74,10 +81,11 @@ $(document).ready(function(){
 
           html += "</div>";
           
-          $("#infobar").html(html);
           
+          // Delete the tip that infovis want's to show.
           tip.parentElement.removeChild(tip);
-         //tip.innerHTML = html;
+          // Show our own one instead
+          $("#infobar").html(html);
         }
       },
 
