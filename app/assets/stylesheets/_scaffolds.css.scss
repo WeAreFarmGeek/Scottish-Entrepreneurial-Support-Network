@@ -87,7 +87,8 @@ body, #vis, #vis-label,
 
   img {
     float: left;
-    height: 135px;
+    max-width: 135px;
+    max-height: 135px;
   }
 
   div.header {
