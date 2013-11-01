@@ -205,11 +205,39 @@ $(document).ready(function(){
         return w;
       }
     };
+    var set_opacity = function(d, i){
+      var data = "";
+      if (Type == "tag")      { data += d.data.tags.join(" ").toLowerCase();       }
+      if (Type == "category") { data += d.data.categories.join(" ").toLowerCase(); }
+
+      var a = 1;
+
+      if (data.indexOf(FilterString) == -1 || FilterString == "") {
+        return a;
+      } else {
+        return a/2;
+      }
+    };
+
+    var set_filter = function(d, i) {
+        var data = "";
+        if (Type == "tag")      { data += d.data.tags.join(" ").toLowerCase();       }
+        if (Type == "category") { data += d.data.categories.join(" ").toLowerCase(); }
+
+
+        if (data.indexOf(FilterString) == -1 || FilterString == "") {
+            return "none";
+        } else {
+            return "grayscale(100%) blur(5px)";
+        }
+    }
 
     vis.selectAll('.node')
        .transition()
        .attr("width", set_width_height)
-       .attr('height', set_width_height);
+       .attr('height', set_width_height)
+       .style('opacity', set_opacity)
+       .style('+filter', set_filter);
   }
 
   // When the text changes on the filter input
