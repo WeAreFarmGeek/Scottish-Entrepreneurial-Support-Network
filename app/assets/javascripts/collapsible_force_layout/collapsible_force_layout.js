@@ -5,15 +5,26 @@ $(document).ready(function(){
       link,
       root;
 
+  var selected_node  = null,
+      selected_link  = null,
+      mousedown_link = null,
+      mousedown_node = null,
+      mouseup_node   = null;
+
   var force = d3.layout.force()
       .on("tick", tick)
       .charge(-5000)
       .linkDistance(100)
       .size([w, h - 160]);
 
-  var vis = d3.select("div#collapsible_force_layout").append("svg:svg")
-      .attr("width", w)
-      .attr("height", h);
+  var outer = d3.select("div#collapsible_force_layout").append("svg:svg")
+              .attr("width", w)
+              .call(d3.behavior.zoom().on("zoom", rescale))
+              .attr("height", h)
+              .attr("pointer-events", "all");
+
+  var vis = outer.append("svg:g")
+    
 
   d3.json("/admin/organisations/tree.json", function(json) {
     root = json;
@@ -21,6 +32,60 @@ $(document).ready(function(){
     root.y = h / 2 - 80;
     update();
   });
+
+    function mousedown() {
+        if (!mousedown_mode && !mousedown_link) {
+            // allow panning if nothing is selected
+            vis.call(d3.behavior.zoom().on("zoom"), rescale);
+            return;
+        }
+    }
+
+    function mousemove() {
+        if (!mousedown_node) return;
+
+        // update drag line
+        drag_line
+            .attr("x1", mousedown_node.x)
+            .attr("y1", mousedown_node.y)
+            .attr("x2", d3.svg.mouse(this)[0])
+            .attr("y2", d3.svg.mouse(this)[1]);
+    }
+
+    function mouseup() {
+        if (mousedown_node) {
+            // hide drag line
+            drag_line.attr("class", "drag_line_hidden")
+            if (!mouseup_node) {
+                // Add node
+                var point = d3.mouse(this);
+                node = {x: point[0], y: point[1]},
+                n = nodes.push(node);
+
+                // select new node
+                selected_node = node;
+                selected_link = null;
+
+                // add link to mousedown node
+                links.push({source: mousedown_node, target: node});
+            }
+            update();
+        }
+        resetMouseVars();
+    }
+
+    function resetMouseVars() {
+        mousedown_node = null;
+        mouseup_node   = null;
+        mousedown_link = null;
+    }
+
+    function rescale() {
+        trans = d3.event.translate;
+        scale = d3.event.scale;
+
+        vis.attr("transform", "scale(" + scale + ") translate(" + trans + ")"); 
+    }
 
   function update() {
     var nodes = flatten(root),
