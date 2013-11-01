@@ -7,8 +7,8 @@ $(document).ready(function(){
 
   var force = d3.layout.force()
       .on("tick", tick)
-      .charge(function(d) { return d._children ? -d.size / 100 : -30; })
-      .linkDistance(function(d) { return d.target._children ? 80 : 30; })
+      .charge(-5000)
+      .linkDistance(100)
       .size([w, h - 160]);
 
   var vis = d3.select("div#collapsible_force_layout").append("svg:svg")
@@ -17,7 +17,6 @@ $(document).ready(function(){
 
   d3.json("/admin/organisations/tree.json", function(json) {
     root = json;
-    root.fixed = true;
     root.x = w / 2;
     root.y = h / 2 - 80;
     update();
@@ -49,25 +48,18 @@ $(document).ready(function(){
     link.exit().remove();
 
     // Update the nodes…
-    node = vis.selectAll("circle.node")
-        .data(nodes, function(d) { return d.id; })
-        .style("fill", color);
-
-    node.transition()
-        .attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; });
+    node = vis.selectAll("image.node").data(nodes, function(d) { return d.id; });
 
     // Enter any new nodes.
-    node.enter().append("svg:circle")
+    node.enter().append("image")
         .attr("class", "node")
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-        .attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; })
-        .style("fill", color);
-        /* 
-         Remove the dragginess of the nodes until I understand it better.
-        .on("click", click)
-        .call(force.drag);
-        */
+        .attr("xlink:href", function(d) { return d.data.logo.thumb; }) 
+        .attr("x", function(d) { return d.x - 25; })
+        .attr("y", function(d) { return d.y - 25; })
+        .attr("width", 50)
+        .attr("height", 50)
+        .call(force.drag)
+        .on("mouseover", show_info);
 
     // Exit any old nodes.
     node.exit().remove();
@@ -79,36 +71,10 @@ $(document).ready(function(){
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
-    node.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
-  }
+    node.attr("x", function(d) { return d.x - 25; })
+        .attr("y", function(d) { return d.y - 25; });
 
-  // Color leaf nodes orange, and packages white or blue.
-  function color(d) {
-    var random = Math.floor((Math.random()*7));
-    return [
-      '#7fc2e8',
-      '#f09552', 
-      '#9da6bd',
-      '#22b9c6',
-      '#ffd43a',
-      '#ffd43a',
-      '#e5502d',
-      '#e5502d'
-        ][random];
-    //return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
-  }
-
-  // Toggle children on click.
-  function click(d) {
-    if (d.children) {
-    //  d._children = d.children;
-    //  d.children = null;
-    } else {
-    //  d.children = d._children;
-    //  d._children = null;
-    }
-    update();
+    force.start();
   }
 
   // Returns a list of all nodes under the root.
@@ -125,4 +91,72 @@ $(document).ready(function(){
     root.size = recurse(root);
     return nodes;
   }
+
+    function show_info(d,i) {
+        var html = "<div>";
+        html += "<h2>" + d.name + "</h2>";
+        if (d.data.logo && d.data.logo.thumb && d.data.logo.thumb.length > 0) {
+            html += "<img style='float: left; padding: 5px' src='"+ d.data.logo.thumb +"'/>";
+        }
+        html += "<p>" + d.data.blurb + "</p>";
+        if (d.data.tags && d.data.tags.length > 0) {
+            html += "<strong>Tags:</strong>";
+            html += "<ul>";
+            for (var x = 0; x < d.data.tags.length; x++) {
+                html += "<li>";
+                html += d.data.tags[x];
+                html += "</li>";
+            }
+            html += "</ul>";
+        }
+
+        if (d.data.categories && d.data.categories.length > 0) {
+            html += "<strong>Categories:</strong>";
+            html += "<ul>";
+            for (var x = 0; x < d.data.categories.length; x++) {
+                html += "<li>";
+                html += d.data.categories[x];
+                html += "</li>";
+            }
+            html += "</ul>";
+        }
+
+        html += "</div>";
+        $('#infobar').html(html);
+    }
+
+  function do_filter(context, type) {
+    Self = context;
+    Type = type;
+    FilterString = $(Self).val().toLowerCase();
+    var set_width_height = function(d, i){
+      var data = "";
+      if (Type == "tag")      { data += d.data.tags.join(" ").toLowerCase();       }
+      if (Type == "category") { data += d.data.categories.join(" ").toLowerCase(); }
+
+      w = 50;
+
+      if (data.indexOf(FilterString) == -1) {
+        return w * 2;
+      } else {
+        return w;
+      }
+    };
+
+    vis.selectAll('.node')
+       .transition()
+       .attr("width", set_width_height)
+       .attr('height', set_width_height);
+  }
+
+  // When the text changes on the filter input
+  $('select#tag_filter').change(function(){
+    do_filter(this, 'tag');
+  });
+
+  // When the text changes on the filter input
+  $('select#category_filter').change(function(){
+    do_filter(this, 'category');
+  });
+
 });
