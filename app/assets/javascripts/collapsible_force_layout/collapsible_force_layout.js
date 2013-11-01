@@ -120,7 +120,7 @@ $(document).ready(function(){
         }
 
         html += "</div>";
-        $('#infobar').html(html);
+        $('#infobar').html(html).show();
     }
 
   function do_filter(context, type) {
