@@ -2,3 +2,15 @@
   <li><%= link_to "Customise Header", :admin_headers %></li>
   <li><%= link_to "Customise Footer", :admin_footers %></li>
 </ul>
+
+<%= simple_form_for([:admin, @graph], :url => admin_preferences_path) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :setting, :collection => @graphs, :include_blank => false %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
