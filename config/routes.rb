@@ -12,6 +12,8 @@ ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
     root 'organisations#index'
     get "/organisations/tree(.:format)", to: "organisations#tree", as: "tree_organisation"
     get "preferences", to: "preferences#index", as: "preferences"
+    patch "preferences", to: "preferences#update"
+    put   "preferences", to: "preferences#update", as: "update_preferences"
     resources :organisations
     resources :tags
     resources :categories
