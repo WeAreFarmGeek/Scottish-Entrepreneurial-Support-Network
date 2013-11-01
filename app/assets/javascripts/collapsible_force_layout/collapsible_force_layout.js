@@ -73,8 +73,6 @@ $(document).ready(function(){
 
     node.attr("x", function(d) { return d.x - 25; })
         .attr("y", function(d) { return d.y - 25; });
-
-    force.start();
   }
 
   // Returns a list of all nodes under the root.
