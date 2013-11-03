@@ -13,8 +13,8 @@ $(document).ready(function(){
 
   var force = d3.layout.force()
       .on("tick", tick)
-      .charge(-5000)
-      .linkDistance(100)
+      .charge(-2000)
+      .linkDistance(50)
       .size([w, h - 160]);
 
   var outer = d3.select("div#collapsible_force_layout").append("svg:svg")
