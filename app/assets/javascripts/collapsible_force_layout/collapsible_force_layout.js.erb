@@ -118,7 +118,10 @@ $(document).ready(function(){
     // Enter any new nodes.
     node.enter().append("image")
         .attr("class", "node")
-        .attr("xlink:href", function(d) { return d.data.logo.thumb; }) 
+        .attr("xlink:href", function(d) { 
+          if (d.data.logo.thumb) { return d.data.logo.thumb; }
+          return "<%= asset_path('node.png') %>"; 
+        }) 
         .attr("x", function(d) { return d.x - 25; })
         .attr("y", function(d) { return d.y - 25; })
         .attr("width", 50)

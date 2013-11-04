@@ -9,8 +9,8 @@ json.data do |json|
       json.thumb    asset_url(node.logo(:thumb))
       json.original asset_url(node.logo.url)
     else
-      json.thumb image_url "missing.png"
-      json.original image_url "missing.png"
+      json.thumb image_url "node.png"
+      json.original image_url "node.png"
     end
   end
   json.tags node.tags.select(:name).inject([]) {|i,j| i.push j.name }
