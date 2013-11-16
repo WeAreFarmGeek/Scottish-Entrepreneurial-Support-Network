@@ -13,8 +13,8 @@ $(document).ready(function(){
 
   var force = d3.layout.force()
       .on("tick", tick)
-      .charge(-2000)
-      .linkDistance(50)
+      .charge(-1000)
+      .linkDistance(40)
       .size([w, h - 160]);
 
   var outer = d3.select("div#collapsible_force_layout").append("svg:svg")
@@ -122,10 +122,10 @@ $(document).ready(function(){
           if (d.data.logo.thumb) { return d.data.logo.thumb; }
           return "<%= asset_path('node.png') %>"; 
         }) 
-        .attr("x", function(d) { return d.x - 25; })
-        .attr("y", function(d) { return d.y - 25; })
-        .attr("width", 50)
-        .attr("height", 50)
+        .attr("x", function(d) { return d.x - 15; })
+        .attr("y", function(d) { return d.y - 15; })
+        .attr("width", 30)
+        .attr("height", 30)
         .call(force.drag)
         .on("mouseover", show_info);
 
@@ -139,8 +139,8 @@ $(document).ready(function(){
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
-    node.attr("x", function(d) { return d.x - 25; })
-        .attr("y", function(d) { return d.y - 25; });
+    node.attr("x", function(d) { return d.x - 15; })
+        .attr("y", function(d) { return d.y - 15; });
   }
 
   // Returns a list of all nodes under the root.
@@ -160,7 +160,10 @@ $(document).ready(function(){
 
     function show_info(d,i) {
         var html = "<div>";
-        html += "<h2>" + d.name + "</h2>";
+        var name = d.name;
+        console.log(d);
+        if (d.data.url && d.data.url.length > 0) { name = "<a href='"+d.data.url+"'>"+name+"</a>"; }
+        html += "<h2>" + name + "</h2>";
         if (d.data.logo && d.data.logo.thumb && d.data.logo.thumb.length > 0) {
             html += "<img style='float: left; padding: 5px' src='"+ d.data.logo.thumb +"'/>";
         }
@@ -200,7 +203,7 @@ $(document).ready(function(){
       if (Type == "tag")      { data += d.data.tags.join(" ").toLowerCase();       }
       if (Type == "category") { data += d.data.categories.join(" ").toLowerCase(); }
 
-      w = 50;
+      w = 30;
 
       if (data.indexOf(FilterString) == -1) {
         return w * 2;
