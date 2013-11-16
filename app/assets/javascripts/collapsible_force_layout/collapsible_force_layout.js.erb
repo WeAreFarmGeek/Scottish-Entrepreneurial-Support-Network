@@ -161,7 +161,6 @@ $(document).ready(function(){
     function show_info(d,i) {
         var html = "<div>";
         var name = d.name;
-        console.log(d);
         if (d.data.url && d.data.url.length > 0) { name = "<a href='"+d.data.url+"'>"+name+"</a>"; }
         html += "<h2>" + name + "</h2>";
         if (d.data.logo && d.data.logo.thumb && d.data.logo.thumb.length > 0) {
@@ -186,7 +185,7 @@ $(document).ready(function(){
                 html += "<li>";
                 html += d.data.categories[x];
                 html += "</li>";
-            }
+            } 
             html += "</ul>";
         }
 
@@ -194,31 +193,45 @@ $(document).ready(function(){
         $('#infobar').html(html).show();
     }
 
-  function do_filter(context, type) {
-    Self = context;
-    Type = type;
-    FilterString = $(Self).val().toLowerCase();
+  function do_filter(contexts) {
+    FilterString = contexts;
+
+    function find_match(filters, data) {
+      Match = false;
+      Data  = data;
+      $.each(filters, function(i, v) {
+        if (v.val().length > 1 && v.val().indexOf(Data) == -1) {
+          Match = true;
+        } else {
+          Match = false;
+        }
+      });
+
+      return Match;
+    };
+
     var set_width_height = function(d, i){
-      var data = "";
-      if (Type == "tag")      { data += d.data.tags.join(" ").toLowerCase();       }
-      if (Type == "category") { data += d.data.categories.join(" ").toLowerCase(); }
+      var data = d.data.tags.concat(d.data.categories).join(" ").toLowerCase();
+      var w = 30;
 
-      w = 30;
-
-      if (data.indexOf(FilterString) == -1) {
+      if (find_match(FilterString, data) && d.data.logo.original.indexOf("/node.png") == -1) {
         return w * 2;
       } else {
         return w;
       }
     };
+    
     var set_opacity = function(d, i){
-      var data = "";
-      if (Type == "tag")      { data += d.data.tags.join(" ").toLowerCase();       }
-      if (Type == "category") { data += d.data.categories.join(" ").toLowerCase(); }
-
+      var data = d.data.tags.concat(d.data.categories).join(" ").toLowerCase();
       var a = 1;
 
-      if (data.indexOf(FilterString) == -1 || FilterString == "") {
+      Size = 0;
+
+      $.each(FilterString, function(i,v){
+        Size += v.val().length;
+      });
+
+      if ((find_match(FilterString, data) && d.data.logo.original.indexOf("/node.png") == -1) || Size == 0) {
         return a;
       } else {
         return a/2;
@@ -226,34 +239,26 @@ $(document).ready(function(){
     };
 
     var set_filter = function(d, i) {
-        var data = "";
-        if (Type == "tag")      { data += d.data.tags.join(" ").toLowerCase();       }
-        if (Type == "category") { data += d.data.categories.join(" ").toLowerCase(); }
+      var data = d.data.tags.concat(d.data.categories).join(" ").toLowerCase();
 
-
-        if (data.indexOf(FilterString) == -1 || FilterString == "") {
-            return "none";
-        } else {
-            return "grayscale(100%) blur(5px)";
-        }
+      if ((find_match(FilterString, data) && d.data.logo.original.indexOf("/node.png") == -1) || Size == 0) {
+        return "none";
+      } else {
+        return "grayscale(100%) blur(5px)";
+      }
     }
 
     vis.selectAll('.node')
        .transition()
-       .attr("width", set_width_height)
-       .attr('height', set_width_height)
+       .attr( 'width',   set_width_height)
+       .attr( 'height',  set_width_height)
        .style('opacity', set_opacity)
        .style('+filter', set_filter);
   }
 
   // When the text changes on the filter input
-  $('select#tag_filter').change(function(){
-    do_filter(this, 'tag');
-  });
-
-  // When the text changes on the filter input
-  $('select#category_filter').change(function(){
-    do_filter(this, 'category');
+  $('select#tag_filter, select#category_filter').change(function(){
+    do_filter([$('select#tag_filter'), $('select#category_filter')]);
   });
 
 });
