@@ -194,27 +194,42 @@ $(document).ready(function(){
     }
 
   function do_filter(contexts) {
-    FilterString = contexts;
+    Filters = contexts;
 
-    function find_match(filters, data) {
-      Match = false;
-      Data  = data;
-      $.each(filters, function(i, v) {
-        if (v.val().length > 1 && v.val().indexOf(Data) == -1) {
-          Match = true;
-        } else {
-          Match = false;
+    function find_match(filters, data, d) {
+      var match = false;
+      var count = 0, filter;
+
+      //var output = [];
+
+      $.each(filters, function(i,filter){
+        if (filter.length > 1) {
+          if (data.indexOf(filter.toLowerCase()) !== -1) {
+            match = true;
+            //output.push("Passed on: "+filter+" vs " +data);
+          } else {
+            match = false;
+            //output.push("Failed on: "+filter+" vs " +data);
+            return false;
+          }
         }
       });
 
-      return Match;
+      //if (d) { 
+      //  console.log('-------------');
+      //  console.log(d.name + " => " + match); 
+      //  $.each(output, function(i,v) { console.log(v); });
+      //  console.log('-------------');
+      //}
+
+      return match;
     };
 
     var set_width_height = function(d, i){
       var data = d.data.tags.concat(d.data.categories).join(" ").toLowerCase();
       var w = 30;
 
-      if (find_match(FilterString, data) && d.data.logo.original.indexOf("/node.png") == -1) {
+      if (find_match(Filters, data, d) && d.data.logo.original.indexOf("/node.png") == -1) {
         return w * 2;
       } else {
         return w;
@@ -227,11 +242,9 @@ $(document).ready(function(){
 
       Size = 0;
 
-      $.each(FilterString, function(i,v){
-        Size += v.val().length;
-      });
+      $.each(Filters, function(i,v){ Size += v.length; });
 
-      if ((find_match(FilterString, data) && d.data.logo.original.indexOf("/node.png") == -1) || Size == 0) {
+      if ((find_match(Filters, data) && d.data.logo.original.indexOf("/node.png") == -1) || Size == 0) {
         return a;
       } else {
         return a/2;
@@ -241,7 +254,10 @@ $(document).ready(function(){
     var set_filter = function(d, i) {
       var data = d.data.tags.concat(d.data.categories).join(" ").toLowerCase();
 
-      if ((find_match(FilterString, data) && d.data.logo.original.indexOf("/node.png") == -1) || Size == 0) {
+      var count=0, filter;
+      while(filter = Filters[count++]) { Size += filter.length; } 
+
+      if ((find_match(Filters, data) && d.data.logo.original.indexOf("/node.png") == -1) || Size == 0) {
         return "none";
       } else {
         return "grayscale(100%) blur(5px)";
@@ -258,7 +274,7 @@ $(document).ready(function(){
 
   // When the text changes on the filter input
   $('select#tag_filter, select#category_filter').change(function(){
-    do_filter([$('select#tag_filter'), $('select#category_filter')]);
+    do_filter([$('select#tag_filter').val(), $('select#category_filter').val()]);
   });
 
 });
