@@ -1,14 +1,12 @@
 <div class="search_form">
   <h3>Filter</h3>
 
-  <label for="category_filter">I am:</label><br/>
-  <%= select_tag :category_filter, options_for_select(@categories), :id => :category_filter, :class => 'select2' %>
-
-  <div class="clearfix"></div>
-  <br/>
-
-  <label for="tag_filter">I am looking for:</label><br/>
-  <%= select_tag :tag_filter, options_for_select(@tags), :id => :tag_filter, :class => 'select2' %>
+  <% @search_types.each do |s| %>
+    <label for="<%= s.pretty_name %>_filter"><%= s.name.capitalize %>:</label><br/>
+    <%= select_tag "#{s.pretty_name}_filter", options_for_select([nil] + s.searches.map{|m| [m.search] }), :id => "#{s.pretty_name}_filter", :class => 'select2 filter' %>
+    <div class="clearfix"></div>
+    <br/>
+  <% end %>
 </div>
 
 <div id="infobar"></div>

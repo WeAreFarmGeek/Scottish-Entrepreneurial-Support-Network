@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130925164651) do
+ActiveRecord::Schema.define(version: 20131119031200) do
 
   create_table "footers", force: true do |t|
     t.string   "image"
@@ -51,10 +51,32 @@ ActiveRecord::Schema.define(version: 20130925164651) do
     t.string   "url"
   end
 
+  create_table "organisations_searches", id: false, force: true do |t|
+    t.integer "organisation_id"
+    t.integer "search_id"
+  end
+
   create_table "organisations_tags", force: true do |t|
     t.integer "organisation_id"
     t.integer "tag_id"
   end
+
+  create_table "search_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "search_types", ["name"], name: "index_search_types_on_name", using: :btree
+
+  create_table "searches", force: true do |t|
+    t.integer  "search_type_id"
+    t.string   "search"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "searches", ["search_type_id"], name: "index_searches_on_search_type_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"

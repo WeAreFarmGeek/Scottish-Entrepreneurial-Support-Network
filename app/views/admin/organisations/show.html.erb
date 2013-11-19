@@ -16,24 +16,16 @@
 </p>
 <%= simple_format @organisation.blurb %>
 
-<% if @organisation.tags.length > 0 %>
+<% if @organisation.searches.present? %>
   <p>
-    <strong>Tags:</strong>
+    <strong>Searches:</strong>
     <ul>
-      <%= @organisation.tags.all.inject("") {|i,j| i += "<li>#{j.name}</li>" }.html_safe %>
+      <% @organisation.searches.order(:search_type_id).each do |s| %>
+        <li><%= s.search %></li>
+      <% end %>
     </ul>
   </p>
 <% end %>
-
-<% if @organisation.categories.length > 0 %>
-  <p>
-    <strong>Categories:</strong>
-    <ul>
-      <%= @organisation.categories.all.inject("") {|i,j| i += "<li>#{j.name}</li>" }.html_safe %>
-    </ul>
-  </p>
-<% end %>
-
 
 <% if @organisation.parent %>
 	<p>

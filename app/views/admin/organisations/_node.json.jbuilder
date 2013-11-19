@@ -13,8 +13,9 @@ json.data do |json|
       json.original image_url "node.png"
     end
   end
-  json.tags node.tags.select(:name).inject([]) {|i,j| i.push j.name }
-  json.categories node.categories.select(:name).inject([]) {|i,j| i.push j.name }
+  json.search_types node.search_types do |search_type|
+    json.array! search_type.searches.map {|m| m.search }
+  end
   json.url node.url
 end
 json.children node.children do |json, node|

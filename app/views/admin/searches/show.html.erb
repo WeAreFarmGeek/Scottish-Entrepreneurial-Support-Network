@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Search:</strong>
+  <%= @search.search %>
+</p>
+
+<%= link_to 'Edit', edit_admin_search_type_search_path(@search_type, @search) %> |
+<%= link_to 'Back', admin_search_type_searches_path(@search_type) %>

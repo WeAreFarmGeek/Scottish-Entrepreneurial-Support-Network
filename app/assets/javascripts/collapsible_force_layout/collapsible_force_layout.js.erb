@@ -131,6 +131,11 @@ $(document).ready(function(){
 
     // Exit any old nodes.
     node.exit().remove();
+
+    // TODO: Find a way to detect what the width and height should be, so 
+    //       that we can then define the zoom level and then run this
+    //       line in a meaningful way.
+    //vis.attr("transform", "scale(1.5) translate(-20, -20)");
   }
 
   function tick() {
@@ -161,31 +166,25 @@ $(document).ready(function(){
     function show_info(d,i) {
         var html = "<div>";
         var name = d.name;
+
         if (d.data.url && d.data.url.length > 0) { name = "<a href='"+d.data.url+"'>"+name+"</a>"; }
+
         html += "<h2>" + name + "</h2>";
+
         if (d.data.logo && d.data.logo.thumb && d.data.logo.thumb.length > 0) {
             html += "<img style='float: left; padding: 5px' src='"+ d.data.logo.thumb +"'/>";
         }
+
         html += "<p>" + d.data.blurb + "</p>";
-        if (d.data.tags && d.data.tags.length > 0) {
+
+        if (d.data.search_types && d.data.search_types.length > 0) {
             html += "<strong>Tags:</strong>";
             html += "<ul>";
-            for (var x = 0; x < d.data.tags.length; x++) {
+            for (var x = 0; x < d.data.search_types.length; x++) {
                 html += "<li>";
-                html += d.data.tags[x];
+                html += d.data.search_types[x];
                 html += "</li>";
             }
-            html += "</ul>";
-        }
-
-        if (d.data.categories && d.data.categories.length > 0) {
-            html += "<strong>Categories:</strong>";
-            html += "<ul>";
-            for (var x = 0; x < d.data.categories.length; x++) {
-                html += "<li>";
-                html += d.data.categories[x];
-                html += "</li>";
-            } 
             html += "</ul>";
         }
 
@@ -200,16 +199,16 @@ $(document).ready(function(){
       var match = false;
       var count = 0, filter;
 
-      //var output = [];
+      var output = [];
 
       $.each(filters, function(i,filter){
         if (filter.length > 1) {
           if (data.indexOf(filter.toLowerCase()) !== -1) {
             match = true;
-            //output.push("Passed on: "+filter+" vs " +data);
+            output.push("Passed on: "+filter+" vs " +data);
           } else {
             match = false;
-            //output.push("Failed on: "+filter+" vs " +data);
+            output.push("Failed on: "+filter+" vs " +data);
             return false;
           }
         }
@@ -226,7 +225,7 @@ $(document).ready(function(){
     };
 
     var set_width_height = function(d, i){
-      var data = d.data.tags.concat(d.data.categories).join(" ").toLowerCase();
+      var data = _.flatten(d.data.search_types).join(" ").toLowerCase();
       var w = 30;
 
       if (find_match(Filters, data, d) && d.data.logo.original.indexOf("/node.png") == -1) {
@@ -237,7 +236,7 @@ $(document).ready(function(){
     };
     
     var set_opacity = function(d, i){
-      var data = d.data.tags.concat(d.data.categories).join(" ").toLowerCase();
+      var data = _.flatten(d.data.search_types).join(" ").toLowerCase();
       var a = 1;
 
       Size = 0;
@@ -252,7 +251,7 @@ $(document).ready(function(){
     };
 
     var set_filter = function(d, i) {
-      var data = d.data.tags.concat(d.data.categories).join(" ").toLowerCase();
+      var data = _.flatten(d.data.search_types).join(" ").toLowerCase();
 
       var count=0, filter;
       while(filter = Filters[count++]) { Size += filter.length; } 
@@ -273,8 +272,10 @@ $(document).ready(function(){
   }
 
   // When the text changes on the filter input
-  $('select#tag_filter, select#category_filter').change(function(){
-    do_filter([$('select#tag_filter').val(), $('select#category_filter').val()]);
+  $('select.filter').change(function(){
+    Filters = [];
+    $.each($('select.filter option:selected'), function(i,v){ Filters.push($(v).val()); });
+    do_filter(Filters);
   });
 
 });

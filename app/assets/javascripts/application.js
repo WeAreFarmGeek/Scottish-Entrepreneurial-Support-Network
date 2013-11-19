@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require select2
 //# require d3
+//= require underscore
 //= require_tree .
 
 
