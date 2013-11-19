@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var w = $(window).width(),
-      h = $(window).height(),
+      h = $(window).height() - 180,
       node,
       link,
       root;
@@ -15,7 +15,7 @@ $(document).ready(function(){
       .on("tick", tick)
       .charge(-1000)
       .linkDistance(40)
-      .size([w, h - 160]);
+      .size([w, h]);
 
   var outer = d3.select("div#collapsible_force_layout").append("svg:svg")
               .attr("width", w)

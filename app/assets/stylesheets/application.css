@@ -31,3 +31,6 @@
     font-size: 18px;
   }
 }
+
+div.form { position: fixed; bottom: 5px; right: 15px; }
+div.form a { background: #858585; color: #fff; padding: 10px; border-radius: 5px;}
