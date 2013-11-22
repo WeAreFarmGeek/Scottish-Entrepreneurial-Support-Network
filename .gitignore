@@ -25,3 +25,4 @@ TAGS
 # We're using 12-factor principals, so we
 # will setup our db config during deployment.
 config/database.yml
+config/unicorn.rb
