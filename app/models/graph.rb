@@ -1,3 +1,8 @@
 class Graph < ActiveRecord::Base
-  validates :setting, inclusion: {  in: %w(collapsible_force_layout spacetree_layout) }, :allow_nil => false, :allow_false => false
+  @types = %w(collapsible_force_layout spacetree_layout)
+  validates :setting, inclusion: {  in: @types }, :allow_nil => false, :allow_false => false
+
+  def self.types
+    @types
+  end
 end
