@@ -14,7 +14,7 @@ json.data do |json|
     end
   end
   json.search_types node.search_types do |search_type|
-    json.array! search_type.searches.map {|m| m.search }
+    json.array! node.searches.where(:search_type_id => search_type.id).map {|m| m.search }.uniq
   end
   json.url node.url
 end
