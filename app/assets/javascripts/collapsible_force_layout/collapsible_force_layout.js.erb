@@ -182,7 +182,7 @@ $(document).ready(function(){
             html += "<ul>";
             for (var x = 0; x < d.data.search_types.length; x++) {
                 html += "<li>";
-                html += d.data.search_types[x];
+                html += d.data.search_types[x].join(", ");
                 html += "</li>";
             }
             html += "</ul>";
