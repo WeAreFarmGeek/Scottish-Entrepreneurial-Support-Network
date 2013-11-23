@@ -13,7 +13,7 @@ json.data do |json|
       json.original image_url "node.png"
     end
   end
-  json.search_types node.search_types do |search_type|
+  json.search_types node.search_types.uniq do |search_type|
     json.array! node.searches.where(:search_type_id => search_type.id).map {|m| m.search }.uniq
   end
   json.url node.url
