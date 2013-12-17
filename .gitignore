@@ -21,6 +21,7 @@
 .DS_Store
 .sass-cache
 TAGS
+*.swp
 
 # We're using 12-factor principals, so we
 # will setup our db config during deployment.
