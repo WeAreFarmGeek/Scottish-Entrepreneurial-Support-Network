@@ -94,6 +94,9 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    logstash-event (1.1.5)
+    logstasher (0.4.0)
+      logstash-event (~> 1.1.0)
     lol_dba (1.6.0)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -229,6 +232,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   libnotify
+  logstasher
   lol_dba
   mysql2
   paperclip
