@@ -86,5 +86,5 @@ ScottishEntrepreneurialSupportNetwork::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.logstasher.enabled = true
-  :onfig.logstasher.suppress_app_log = false
+  config.logstasher.suppress_app_log = false
 end
