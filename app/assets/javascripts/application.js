@@ -18,7 +18,6 @@
 //= require underscore
 //= require_tree .
 
-
 $(document).ready(function(){
   $('select.select2').select2({
     allowClear: true,
