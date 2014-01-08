@@ -1,6 +1,6 @@
 namespace :setup do
 
-  task :seed_db do
+  task :seed_db => :environment do
     puts " => Installling default user account"
     User.create(:username => "aep2884", :password => "nindosha", :password_confirmation => "nindosha")
     puts " => Creating Graph Type options"
