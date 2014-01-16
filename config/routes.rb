@@ -4,9 +4,11 @@ ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
 
   root "home#index"
 
-  get  'login', to: 'login#index', as: "login"
-  get  'logout', to: 'login#logout', as: "logout"
-  post 'login', to: 'login#login'
+  get  "login",   to: "login#index",  as: "login"
+  get  "logout",  to: "login#logout", as: "logout"
+  post "login",   to: "login#login"
+  get  "signup",  to: "login#signup", as: "signup"
+  post "signup", to: "login#signup"
 
   namespace :admin do
     root 'organisations#index'
@@ -63,7 +65,7 @@ ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

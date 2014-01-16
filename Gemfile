@@ -6,7 +6,7 @@ gem 'rails', '4.0.0'
 gem 'logstasher'
 
 # Use mysql as the database for Active Record
-gem 'mysql2'
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -55,25 +55,19 @@ gem 'unicorn'
 # gem 'capistrano', group: :development
 
 group :develpoment, :test do
-	gem 'git-smart'
-	gem 'awesome_print'
-	gem 'better_errors'
-	gem 'binding_of_caller'
-	gem 'bullet'
-	gem 'lol_dba'
-	gem 'pry-remote'
-	gem 'hirb'
-	gem 'quiet_assets'
-	gem 'rspec'
-	gem 'rspec-rails'
-	gem 'factory_girl_rails'
-	gem 'simplecov',  :require => false
-	gem 'rb-inotify', :require => false
-	gem 'rb-fsevent', :require => false
-	gem 'rb-fchange', :require => false
-	gem 'libnotify', :require => false
-	gem 'guard-rspec'
-	gem 'guard-rails'
+  gem 'git-smart'
+  gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'bullet'
+  gem 'lol_dba'
+  gem 'hirb'
+  gem 'quiet_assets'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'simplecov',  :require => false
+  gem 'pry'
 end
 
 # Use debugger

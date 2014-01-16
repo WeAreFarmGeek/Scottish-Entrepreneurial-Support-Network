@@ -1,6 +1,6 @@
 <div class="admin_login">
   <h2>Login</h2>
-  <%= form_for :user, :url => login_path do |f| %>
+  <%= form_for :user, :url => signup_path do |f| %>
     <%= f.label :email %>
     <%= f.text_field :email %>
 
@@ -11,6 +11,11 @@
 
     <br/>
 
-    <%= f.submit "Login" %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+
+    <br/>
+
+    <%= f.submit "Register" %>
   <% end %>
 </div>

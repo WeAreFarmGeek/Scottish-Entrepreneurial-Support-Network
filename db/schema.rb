@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119031200) do
+ActiveRecord::Schema.define(version: 20140116112301) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "footers", force: true do |t|
     t.string   "image"
@@ -86,11 +89,11 @@ ActiveRecord::Schema.define(version: 20131119031200) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "username"
     t.string   "password_digest"
     t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
   end
 
 end
