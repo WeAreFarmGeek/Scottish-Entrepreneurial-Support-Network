@@ -1,8 +1,9 @@
 namespace :setup do
 
+  desc "Install defaults"
   task :seed_db => :environment do
     puts " => Installling default user account"
-    User.create(:username => "aep2884", :password => "nindosha", :password_confirmation => "nindosha")
+    User.create(:email => "john@johnhamelink.com", :password => "nopass", :password_confirmation => "nopass")
     puts " => Creating Graph Type options"
     Graph.types.each do |t|
       Graph.create(:setting => t)
