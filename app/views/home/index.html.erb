@@ -1,19 +1,23 @@
-<% if @search_types.length > 0 %>
-  <div class="search_form">
-    <h3>Filter</h3>
-    <% @search_types.each do |s| %>
-      <label for="<%= s.pretty_name %>_filter"><%= s.name.capitalize %>:</label><br/>
-      <%= select_tag "#{s.pretty_name}_filter", options_for_select([nil] + s.searches.map{|m| [m.search] }), :id => "#{s.pretty_name}_filter", :class => 'select2 filter' %>
-      <div class="clearfix"></div>
-      <br/>
-    <% end %>
-    <div id="infobar"></div>
-  </div>
+<% unless @embed %>
+  <% if @search_types.length > 0 %>
+    <div class="search_form">
+      <h3>Filter</h3>
+      <% @search_types.each do |s| %>
+        <label for="<%= s.pretty_name %>_filter"><%= s.name.capitalize %>:</label><br/>
+        <%= select_tag "#{s.pretty_name}_filter", options_for_select([nil] + s.searches.map{|m| [m.search] }), :id => "#{s.pretty_name}_filter", :class => 'select2 filter' %>
+        <div class="clearfix"></div>
+        <br/>
+      <% end %>
+      <div id="infobar"></div>
+    </div>
+  <% end %>
 <% end %>
 
 
-<div class="form">
-  <a href="https://docs.google.com/forms/d/1KeqPjh_cDtvco4QiS4RmAkNDRJkAwhTcAVtQ8cN_KYU/viewform">Subscribe to the mailing list</a>
-</div>
+<% unless @embed %>
+  <div class="form">
+    <a href="https://docs.google.com/forms/d/1KeqPjh_cDtvco4QiS4RmAkNDRJkAwhTcAVtQ8cN_KYU/viewform">Subscribe to the mailing list</a>
+  </div>
+<% end %>
 
 <%= render "home/graphs/#{Graph.first.setting}" %>

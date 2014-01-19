@@ -3,6 +3,8 @@ ScottishEntrepreneurialSupportNetwork::Application.routes.draw do
   resources :footers
 
   root "home#index"
+  get "embed", to: "home#embed", as: "embed"
+
 
   get  "login",   to: "login#index",  as: "login"
   get  "logout",  to: "login#logout", as: "logout"
