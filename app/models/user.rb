@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :request
   has_secure_password
-  validate :domain_email, :on => :create
+  #validate :domain_email, :on => :create
 
   def update_attributes args, req
     self.request = req
