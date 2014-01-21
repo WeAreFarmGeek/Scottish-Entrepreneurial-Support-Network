@@ -25,7 +25,8 @@ class LoginController < ApplicationController
 
   def signup
     user = User.new
-    user.update_attributes(user_params, request) if user_params.length > 0
+    #user.update_attributes(user_params, request) if user_params.length > 0
+    user.update_attributes(user_params) if user_params.length > 0
     if user.save
       session[:user_id] = user.id
       redirect_to :admin_organisations, :notice => 'Successfully Registered & Logged in'

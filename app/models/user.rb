@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessor :request
+ # attr_accessor :request
   has_secure_password
   #validate :domain_email, :on => :create
 
-  def update_attributes args, req
-    self.request = req
-    super args
-  end
+ # def update_attributes args, req
+ #   self.request = req
+ #   super args
+ # end
 
   def domain_email
     if request && request.respond_to?(:host)
