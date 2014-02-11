@@ -1,4 +1,4 @@
-class Admin::HeadersController < Admin::AdminController 
+class Admin::HeadersController < Admin::AdminController
   #before_action :set_header, only: [:show, :edit, :update, :destroy]
   before_action :set_header, only: [:show, :edit, :destroy]
 
