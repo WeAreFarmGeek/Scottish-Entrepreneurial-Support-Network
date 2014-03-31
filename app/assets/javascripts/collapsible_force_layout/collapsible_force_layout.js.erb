@@ -1,9 +1,11 @@
 $(document).ready(function(){
   var w = $(window).width(),
-      h = $(window).height() - 180,
+      h = $(window).height(),
       node,
       link,
       root;
+
+if ($('.footer').length > 0) { h = h - $('.footer').height(); }
 
   var selected_node  = null,
       selected_link  = null,
